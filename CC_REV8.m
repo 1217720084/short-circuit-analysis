@@ -16,7 +16,7 @@ barra_cc=4; %NOME DA BARRA COMO NO ARQUIVO DE ENTRADA
 % entrada=csvread('./4bar_radial_OK.txt'); %ex livro cap 6 cc barra 4
 % entrada=csvread('./5bar_OK.txt'); %ex livro cap 6 cc barra 5
 % entrada=csvread('./8bar_ex14_OK.txt'); %ex 14 lista p1, não há seq zero nos dados monofásico inválido cc barra 7
-% entrada=csvread('./8bar_ex30_OK.txt'); %ex 30 lista p1 cc barra 7
+entrada=csvread('./8bar_ex30_OK.txt'); %ex 30 lista p1 cc barra 7
 % entrada=csvread('./4bar_p1ex1_OK.txt'); %p1 ex1 matriz zbarra
 % entrada=csvread('./8bar_p1ex2_OK.txt'); %p1 ex2 matriz zbarra
 % entrada=csvread('./8bar_p1ex2_sem_ramo_6_4_OK.txt'); %p1 ex2 itens a b c cc barra 6
@@ -50,9 +50,7 @@ for m=1:1:size(entrada,1) %tratamento de topologia seq pos e zero
             zp=zp*((Vp_equip^2)/Sequip)*(Sb/Vpb^2);
             z0=zp;
         end 
-        if(t_z0==0) %gerador
-           entrada_aux=[entrada_aux;[p ficticia zp/2 z0/2 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão geradores            
-        elseif(t_z0==1) %trafo seq zero conexão p-ficticia-0 |q
+        if(t_z0==1) %trafo seq zero conexão p-ficticia-0 |q
            barraNum=[barraNum max(barraNum)+1];
            ficticia=barraNum(end);
            entrada_aux=[entrada_aux;[p ficticia zp/2 z0/2 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão p-ficticia
@@ -63,14 +61,30 @@ for m=1:1:size(entrada,1) %tratamento de topologia seq pos e zero
            ficticia=barraNum(end);
            entrada_aux=[entrada_aux;[p ficticia zp/2 9999 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão p-ficticia
            entrada_aux=[entrada_aux;[0 ficticia 9999 z0/2 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-0
-           entrada_aux=[entrada_aux;[ficticia q zp/2 z0/2 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-q        
-        elseif(t_z0==3) %trafo seq zero conexão p-ficticia-q e ficticia-0 
+           entrada_aux=[entrada_aux;[ficticia q zp/2 z0/2 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-q 
+        elseif(t_z0==3) %trafo seq zero conexão direta p-q
+           entrada_aux=[entrada_aux;[p q zp z0 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão p-q
+        elseif(t_z0==4) %trafo seq zero conexão p| |q 
+           entrada_aux=[entrada_aux;[p q zp 9999 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão p desconectado de p seq 0
+        elseif(t_z0==5) %trafo seq zero conexão p-ficticia-q e ficticia-0 (nucleo envolvido Yaterrado-Yaterrado
            barraNum=[barraNum max(barraNum)+1];
            ficticia=barraNum(end);
            entrada_aux=[entrada_aux;[p ficticia zp/2 z0/2 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão p-ficticia
-           entrada_aux=[entrada_aux;[0 ficticia 9999 z0/2 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-0
+           entrada_aux=[entrada_aux;[0 ficticia 9999 5*z0 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-0
            entrada_aux=[entrada_aux;[ficticia q zp/2 z0/2 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-q
-        end 
+        elseif(t_z0==6) %trafo seq zero conexão p-ficticia-q e ficticia-0 (nucleo envolvido Yaterrado-Yaterrado
+           barraNum=[barraNum max(barraNum)+1];
+           ficticia=barraNum(end);
+           entrada_aux=[entrada_aux;[p ficticia zp/2 0.4*z0 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão p-ficticia
+           entrada_aux=[entrada_aux;[0 ficticia 9999 0.45*z0 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-0
+           entrada_aux=[entrada_aux;[ficticia q zp/2 9999 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-q         
+        elseif(t_z0==7) %trafo seq zero conexão p-ficticia-q e ficticia-0 (nucleo envolvido Yaterrado-Yaterrado
+           barraNum=[barraNum max(barraNum)+1];
+           ficticia=barraNum(end);
+           entrada_aux=[entrada_aux;[p ficticia zp/2 9999 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão p-ficticia
+           entrada_aux=[entrada_aux;[0 ficticia 9999 0.45*z0 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-0
+           entrada_aux=[entrada_aux;[ficticia q zp/2 0.4*z0 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]]; %conexão ficticia-q
+        end
     else %equivalente de sistemam em pu
         entrada_aux=[entrada_aux;[p q zp z0 L Vpb Vqb Sb Vp_equip Vq_equip t_z0]];
     end
