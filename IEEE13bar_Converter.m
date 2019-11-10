@@ -58,12 +58,19 @@ z607=[1.3425+0.5124j 0 0;0 0 0;0 0 0];
 
 T=[1 1 1;exp(j*pi*2/3)^2 exp(j*pi*2/3) 1;exp(j*pi*2/3) exp(j*pi*2/3)^2 1];
 invT=inv(T);
-Zs=invT*z601*T
+Zs606=invT*z606*T
 
 %%
 %equivalente sistema
-S3feq=75.558+192.9996j %MVA
-S1feq=56.981+139.6973j %MVA
-Sb=100 %MVA
-z_pos_sistema=Sb/S3feq
-z_zero_sistema=(3*(Sb/S1feq))-(2*(Sb/S3feq))
+S3feq=75.558+192.9996j; %MVA
+S1feq=56.981+139.6973j; %MVA
+Sb=100; %MVA
+z_pos_sistema=Sb/S3feq;
+z_zero_sistema=(3*(Sb/S1feq))-(2*(Sb/S3feq));
+
+%%
+%equivalente sistema arquivo source
+% Zpositive = 1.5 + j11.6 ohms;
+% Zzero = 4.8 + j21.1 ohms;
+z_pos_sistema2=(1.5+11.6j)*100/(115^2);
+z_zero_sistema2=(4.8+21.1j)*100/(115^2);
