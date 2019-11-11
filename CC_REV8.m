@@ -357,19 +357,37 @@ for i=1:1:length(entrada_sem_ramos_ficticios(:,1))
 end
 %SAÍDA DE DADOS TRIFÁSICO
 disp(['*****CURTO-CIRCUITO TRIFÁSICO*****'])
-disp(array2table([barraNome(find(barraNum==barra_cc)) Icc3f_abs Icc3f_angle], 'VariableNames',{'Barra', 'I_cc_kA', 'deg'}))
-disp(array2table([barraNome(2:end) V3f_abs.' V3f_angle.'], 'VariableNames',{'Barra', 'Vfase_kV', 'deg'}))
-disp(array2table([entrada_sem_ramos_ficticios(:,[1 2]) Ipq3f_abs.' Ipq3f_angle.'], 'VariableNames',{'p', 'q', 'I_kA', 'deg'}))
+TI3F=array2table([barraNome(find(barraNum==barra_cc)) Icc3f_abs Icc3f_angle], 'VariableNames',{'Barra', 'I_cc_kA', 'deg'});
+disp(TI3F)
+TV3F=array2table([barraNome(2:end) V3f_abs.' V3f_angle.'], 'VariableNames',{'Barra', 'Vfase_kV', 'deg'});
+disp(TV3F)
+TIPQ3F=array2table([entrada_sem_ramos_ficticios(:,[1 2]) Ipq3f_abs.' Ipq3f_angle.'], 'VariableNames',{'p', 'q', 'I_kA', 'deg'});
+disp(TIPQ3F)
+writetable(TI3F,'I_cc_3F.txt','Delimiter',' ');
+writetable(TV3F,'V_cc_3F.txt','Delimiter',' ');
+writetable(TIPQ3F,'Ipq_cc_3F.txt','Delimiter',' ');
 disp(['***************************************'])
 %SAÍDA DE DADOS BIFÁSICO
 disp(['*****CURTO-CIRCUITO BIFÁSICO******'])
-disp(array2table([barraNome(find(barraNum==barra_cc)) Icc2fA_abs Icc2fA_angle Icc2fB_abs Icc2fB_angle Icc2fC_abs Icc2fC_angle], 'VariableNames',{'Barra', 'IfA_cc_kA', 'deg_fA', 'IfB_cc_kA', 'deg_fB', 'IfC_cc_kA', 'deg_fC'}))
-disp(array2table([barraNome(2:end) V2fA_abs.' V2fA_angle.' V2fB_abs.' V2fB_angle.' V2fC_abs.' V2fC_angle.'], 'VariableNames',{'Barra', 'VfA_kV', 'VfA_deg', 'VfB_kV', 'VfB_deg', 'VfC_kV', 'VfC_deg'}))
-disp(array2table([entrada_sem_ramos_ficticios(:,[1 2]) Ipq2fA_abs.' Ipq2fA_angle.' Ipq2fB_abs.' Ipq2fB_angle.' Ipq2fC_abs.' Ipq2fC_angle.'], 'VariableNames',{'p', 'q', 'IfA_kA', 'deg_fA', 'IfB_kA', 'deg_fB', 'IfC_kA', 'deg_fC'}))
+TI2F=array2table([barraNome(find(barraNum==barra_cc)) Icc2fA_abs Icc2fA_angle Icc2fB_abs Icc2fB_angle Icc2fC_abs Icc2fC_angle], 'VariableNames',{'Barra', 'IfA_cc_kA', 'deg_fA', 'IfB_cc_kA', 'deg_fB', 'IfC_cc_kA', 'deg_fC'});
+disp(TI2F)
+TV2F=array2table([barraNome(2:end) V2fA_abs.' V2fA_angle.' V2fB_abs.' V2fB_angle.' V2fC_abs.' V2fC_angle.'], 'VariableNames',{'Barra', 'VfA_kV', 'VfA_deg', 'VfB_kV', 'VfB_deg', 'VfC_kV', 'VfC_deg'});
+disp(TV2F)
+TIPQ2F=array2table([entrada_sem_ramos_ficticios(:,[1 2]) Ipq2fA_abs.' Ipq2fA_angle.' Ipq2fB_abs.' Ipq2fB_angle.' Ipq2fC_abs.' Ipq2fC_angle.'], 'VariableNames',{'p', 'q', 'IfA_kA', 'deg_fA', 'IfB_kA', 'deg_fB', 'IfC_kA', 'deg_fC'});
+disp(TIPQ2F)
+writetable(TI2F,'I_cc_2F.txt','Delimiter',' ');
+writetable(TV2F,'V_cc_2F.txt','Delimiter',' ');
+writetable(TIPQ2F,'Ipq_cc_2F.txt','Delimiter',' ');
 disp(['***************************************'])
 %SAÍDA DE DADOS MONOFÁSICO
 disp(['*****CURTO-CIRCUITO MONOFÁSICO******'])
-disp(array2table([barraNome(find(barraNum==barra_cc)) Icc1fA_abs Icc1fA_angle Icc1fB_abs Icc1fB_angle Icc1fC_abs Icc1fC_angle], 'VariableNames',{'Barra', 'IfA_cc_kA', 'deg_fA', 'IfB_cc_kA', 'deg_fB', 'IfC_cc_kA', 'deg_fC'}))
-disp(array2table([barraNome(2:end) V1fA_abs.' V1fA_angle.' V1fB_abs.' V1fB_angle.' V1fC_abs.' V1fC_angle.'], 'VariableNames',{'Barra', 'VfA_kV', 'VfA_deg', 'VfB_kV', 'VfB_deg', 'VfC_kV', 'VfC_deg'}))
-disp(array2table([entrada_sem_ramos_ficticios(:,[1 2]) Ipq1fA_abs.' Ipq1fA_angle.' Ipq1fB_abs.' Ipq1fB_angle.' Ipq1fC_abs.' Ipq1fC_angle.'], 'VariableNames',{'p', 'q', 'IfA_kA', 'deg_fA', 'IfB_kA', 'deg_fB', 'IfC_kA', 'deg_fC'}))
+TI1F=array2table([barraNome(find(barraNum==barra_cc)) Icc1fA_abs Icc1fA_angle Icc1fB_abs Icc1fB_angle Icc1fC_abs Icc1fC_angle], 'VariableNames',{'Barra', 'IfA_cc_kA', 'deg_fA', 'IfB_cc_kA', 'deg_fB', 'IfC_cc_kA', 'deg_fC'});
+disp(TI1F)
+TV1F=array2table([barraNome(2:end) V1fA_abs.' V1fA_angle.' V1fB_abs.' V1fB_angle.' V1fC_abs.' V1fC_angle.'], 'VariableNames',{'Barra', 'VfA_kV', 'VfA_deg', 'VfB_kV', 'VfB_deg', 'VfC_kV', 'VfC_deg'});
+disp(TV1F)
+TIPQ1F=array2table([entrada_sem_ramos_ficticios(:,[1 2]) Ipq1fA_abs.' Ipq1fA_angle.' Ipq1fB_abs.' Ipq1fB_angle.' Ipq1fC_abs.' Ipq1fC_angle.'], 'VariableNames',{'p', 'q', 'IfA_kA', 'deg_fA', 'IfB_kA', 'deg_fB', 'IfC_kA', 'deg_fC'});
+disp(TIPQ1F)
+writetable(TI1F,'I_cc_1F.txt','Delimiter',' ');
+writetable(TV1F,'V_cc_1F.txt','Delimiter',' ');
+writetable(TIPQ1F,'Ipq_cc_1F.txt','Delimiter',' ');
 disp(['***************************************'])
