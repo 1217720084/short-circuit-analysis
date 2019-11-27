@@ -1,0 +1,2 @@
+Barra IfA_cc_kA deg_fA IfB_cc_kA deg_fB IfC_cc_kA deg_fC
+4 4.33873718457029 -81.651917632173 0 0 0 0

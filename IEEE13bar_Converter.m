@@ -11,7 +11,7 @@ z601=[0.3465+1.0179j 0.1560+0.5017j 0.1580+0.4236j;0.1560+0.5017j 0.3375+1.0478j
 %  0.34  1.04   0.15  0.4   0.15  0.4
 %                   0.34  1.04   0.15  0.4
 %                                    0.34  1.04
-%  za601=[0.34+1.04j 0.15+0.4j 0.15+0.4j;0.15+0.4j 0.34+1.04j 0.15+0.4j;0.15+0.4j 0.15+0.4j 0.34+1.04j];
+ za601=[0.34+1.04j 0.15+0.4j 0.15+0.4j;0.15+0.4j 0.34+1.04j 0.15+0.4j;0.15+0.4j 0.15+0.4j 0.34+1.04j];
  
  
 %Configuration 602:
@@ -58,7 +58,7 @@ z607=[1.3425+0.5124j 0 0;0 0 0;0 0 0];
 
 T=[1 1 1;exp(j*pi*2/3)^2 exp(j*pi*2/3) 1;exp(j*pi*2/3) exp(j*pi*2/3)^2 1];
 invT=inv(T);
-Zs606=invT*z606*T
+Zs606=invT*z601*T
 
 %%
 %equivalente sistema
@@ -74,3 +74,39 @@ z_zero_sistema=(3*(Sb/S1feq))-(2*(Sb/S3feq));
 % Zzero = 4.8 + j21.1 ohms;
 z_pos_sistema2=(1.5+11.6j)*100/(115^2);
 z_zero_sistema2=(4.8+21.1j)*100/(115^2);
+
+%%
+Vpos=0.6420*exp(deg2rad(0.6)*j);
+Vneg=0.3581*exp(deg2rad(179)*j);
+Vzero=0.2843*exp(deg2rad(-177.5)*j);
+
+A=T*[Vpos;Vneg;Vzero]
+[abs(A) radtodeg(angle(A))]
+
+%%
+Ia=10
+Ib=10*exp(deg2rad(250)*j)
+Ic=10*exp(deg2rad(110)*j)
+A=inv(T)*[Ia;Ib;Ic]
+[abs(A) radtodeg(angle(A))]
+
+%%
+Ia=0
+Ib=4.6587*exp(deg2rad(-176.5)*j)
+Ic=4.6587*exp(deg2rad(3.5)*j)
+A=inv(T)*[Ia;Ib;Ic]
+[abs(A) radtodeg(angle(A))]
+%%
+Ipos=0.5472*exp(deg2rad(-90)*j);
+Ineg=0.5472*exp(deg2rad(-90)*j);
+Izero=0.5472*exp(deg2rad(-90)*j);
+
+A=T*[Ipos;Ineg;Izero]
+[abs(A) radtodeg(angle(A))]
+%%
+Ipos=0.5472*exp(deg2rad(-60)*j);
+Ineg=0.5472*exp(deg2rad(-120)*j);
+Izero=0*exp(deg2rad(0)*j);
+
+A=T*[Ipos;Ineg;Izero]
+[abs(A) radtodeg(angle(A))]

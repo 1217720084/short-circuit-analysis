@@ -6,7 +6,7 @@ clear
 %ENTRAR COM OS SEGUINTES DADOS MANUALMENTE:
 rf=0; %RESISTÊNCIA DE FALTA [pu]
 Sb=100; %DEFINIR POTENCIA DE BASE DO SISTEMA [MVA]
-barra_cc=675; %NOME DA BARRA COMO NO ARQUIVO DE ENTRADA
+barra_cc=4; %NOME DA BARRA COMO NO ARQUIVO DE ENTRADA
 %AS COMPONENTES DE SEQUÊNCIAS ESTÃO REFERIDAS A FASE A
 %CURTO CIRCUITO BIFÁSICO: CURTO NAS FASES B E C
 %CURTO CIRCUITO MONOFASICO: FASE A À TERRA
@@ -14,14 +14,14 @@ barra_cc=675; %NOME DA BARRA COMO NO ARQUIVO DE ENTRADA
 %ordem das 11 colunas:
 %p|q|z+[pu ou ohm/km]|z0[pu ou ohm/km]|L[km]|Vpb[kV]|Vqb[kV]|Sb_equip[MVA]|Vp_equip[kV]|Vq_equip[kV]|tipo_seq_0
 %%%%%%%%%%%%DADOS DE ENTRADA%%%%%%%%%%%%%%%%%%%
-% entrada=csvread('./4bar_radial_OK.txt'); %ex livro cap 6 cc barra 4
+entrada=csvread('./4bar_radial_OK.txt'); %ex livro cap 6 cc barra 4
 % entrada=csvread('./5bar_OK.txt'); %ex livro cap 6 cc barra 5
 % entrada=csvread('./8bar_ex14_OK.txt'); %ex 14 lista p1, não há seq zero nos dados monofásico inválido cc barra 7
 % entrada=csvread('./8bar_ex30_OK.txt'); %ex 30 lista p1 cc barra 7
 % entrada=csvread('./4bar_p1ex1_OK.txt'); %p1 ex1 matriz zbarra
 % entrada=csvread('./8bar_p1ex2_OK.txt'); %p1 ex2 matriz zbarra
 % entrada=csvread('./8bar_p1ex2_sem_ramo_6_4_OK.txt'); %p1 ex2 itens a b c cc barra 6
-entrada=csvread('./IEEE13.txt'); %cc barra 
+% entrada=csvread('./IEEE13.txt'); %cc barra 
 %03/11/19:todos os resultados dos arquivos testados acima batem com os resultados de referencia 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 barraNome=unique(entrada(:,[1 2])); %esta ordenado menor para o maior devido função unique
